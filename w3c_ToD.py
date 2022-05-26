@@ -70,6 +70,9 @@ flat_matchups = [item for sublist in matchups for item in sublist]
 #Only take games which have 8 players (i.e 4v4 games)
 v4_matchups = [matchup for matchup in flat_matchups if len(matchup)==8] 
 
+#Save the number of 4v4 matches that ToD has played
+num_games = len(v4_matchups)
+
 #ToD's team is always the first 4 players so split the list in half to get the two teams
 tod_team = [matchup[:4] for matchup in v4_matchups]
 villian_team = [matchup[4:] for matchup in v4_matchups]
@@ -81,6 +84,9 @@ flat_villian = [item for sublist in villian_team for item in sublist]
 #Count the number of each race on each team
 tod_counts = [(x, flat_tod.count(x)) for x in set(flat_tod)]
 villian_counts = [(x, flat_villian.count(x)) for x in set(flat_villian)]
+
+#Print all relative statistics
+
 
     
     
