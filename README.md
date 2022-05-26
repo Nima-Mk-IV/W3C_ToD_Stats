@@ -15,6 +15,7 @@ In Warcraft III we have 4 playable races plus the ability to que into a game as 
   - 25% Orc
   - 25% Nightelf
   - 25% Undead 
+
 Under this ussumption we have an expected value of 1.75 humans on ToD's team and 1 human on the enemy team.
 
 #### Better Assumptions:
