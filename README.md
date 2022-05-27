@@ -44,6 +44,7 @@ pie title Race Distribution
 Race distribution over 495 games:
 
 ToD's Team: (Including ToD)
+
 | Race             |   Number |
 |------------------|----------|
 | RANDOM_HUMAN     |       98 |
@@ -56,6 +57,7 @@ ToD's Team: (Including ToD)
 | ORC              |      446 |
 
 Enemy's Team:
+
 | Race             |   Number |
 |------------------|----------|
 | RANDOM_HUMAN     |      142 |
@@ -78,7 +80,19 @@ The one pure RANDOM race on the enemy team seems to be an error inherited from W
 
 #### Game by Game Stats:
 
+Over the 495 games we get the following distribution of the number of humans if we do not include players who queued as random and got human:
+
+ToD's team:
+
+|   # HUMANS |   Number of games |
+|------------|-------------------|
+|          1 |               276 |
+|          2 |               187 |
+|          3 |                30 |
+|          4 |                 2 |
+
 Enemy's team:
+
 |   # HUMANS |   Number of games |
 |------------|-------------------|
 |          0 |               272 |
@@ -90,13 +104,16 @@ And we get that there were 352 games where there were more humans on ToD's team.
 If we include the people who queued as random and got human we get:
 
 ToD's team:
+
 |   # HUMANS |   Number of games |
 |------------|-------------------|
 |          1 |               206 |
 |          2 |               229 |
 |          3 |                58 |
 |          4 |                 2 |
+
 Enemy's team:
+
 |   # HUMANS |   Number of games |
 |------------|-------------------|
 |          0 |               190 |
