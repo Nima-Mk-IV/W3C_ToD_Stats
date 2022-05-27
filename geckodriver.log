@@ -131,3 +131,6 @@ DevTools listening on ws://localhost:57070/devtools/browser/2524c00b-73f6-4cdf-a
 1653594581819	Marionette	INFO	Listening on port 57096
 Read port: 57096
 1653594581893	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1653598481007	Marionette	INFO	Stopped listening on port 57096
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
