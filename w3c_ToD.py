@@ -5,6 +5,9 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.firefox.service import Service
 import time
+from tabulate import tabulate
+from collections import Counter
+import numpy as np
 
 driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
 
@@ -75,18 +78,58 @@ num_games = len(v4_matchups)
 
 #ToD's team is always the first 4 players so split the list in half to get the two teams
 tod_team = [matchup[:4] for matchup in v4_matchups]
-villian_team = [matchup[4:] for matchup in v4_matchups]
+enemy_team = [matchup[4:] for matchup in v4_matchups]
 
 #As we only care about the total number of each race we can combine all the games
 flat_tod = [item for sublist in tod_team for item in sublist]
-flat_villian = [item for sublist in villian_team for item in sublist]
+flat_enemy = [item for sublist in enemy_team for item in sublist]
 
 #Count the number of each race on each team
 tod_counts = [(x, flat_tod.count(x)) for x in set(flat_tod)]
-villian_counts = [(x, flat_villian.count(x)) for x in set(flat_villian)]
+enemy_counts = [(x, flat_enemy.count(x)) for x in set(flat_enemy)]
+
+  
+#Get stats of number of humans on each team
+#Not including randoms
+tods_humans = np.array([game.count('HUMAN') for game in tod_team])
+enemy_humans = np.array([game.count('HUMAN') for game in enemy_team])
+tods_human_counts = Counter(tods_humans)
+enemy_human_counts = Counter(enemy_humans)
+
+tod_more_humans = sum(tods_humans>enemy_humans)
+#Including humans that queued as random
+tods_humans_rand = np.array([game.count('HUMAN') + game.count('RANDOM_HUMAN') for game in tod_team])
+enemy_humans_rand = np.array([game.count('HUMAN') + game.count('RANDOM_HUMAN') for game in enemy_team])
+tods_human_counts_rand = Counter(tods_humans_rand)
+enemy_human_counts_rand = Counter(enemy_humans_rand)
+
+tod_more_humans_rand = sum(tods_humans_rand>enemy_humans_rand)
 
 #Print all relative statistics
+print("Race distribution over {} games:".format(num_games))
+print("ToD's Team: (Including ToD)")
+print(tabulate(tod_counts, headers=['Race', 'Number'], tablefmt="github"))
+print()
+print("Enemy's Team:")
+print(tabulate(enemy_counts, headers=['Race', 'Number'], tablefmt="github"))
+print()
+print("Total number of humans including randoms (including ToD):")
+print("ToD's team: {}".format(sum([x[1] for x in tod_counts if x[0] == 'HUMAN' or x[0] == 'RANDOM_HUMAN'])))
+print("Enemy's team: {}".format(sum([x[1] for x in enemy_counts if x[0] == 'HUMAN' or x[0] == 'RANDOM_HUMAN'])))
+print()
+print("Distribution of number of humans not including those who queued as random:")
+print("ToD's team:")
+print(tabulate(sorted(tods_human_counts.items()), headers=['# HUMANS', 'Number of games'], tablefmt="github"))
+print("Enemy's team:")
+print(tabulate(sorted(enemy_human_counts.items()), headers=['# HUMANS', 'Number of games'], tablefmt="github"))
+print()
+print("The number of games where there are more humans on ToD's team was {}".format(tod_more_humans))
+print()
+print("Distribution of number of humans including those who queued as random:")
+print("ToD's team:")
+print(tabulate(sorted(tods_human_counts_rand.items()), headers=['# HUMANS', 'Number of games'], tablefmt="github"))
+print("Enemy's team:")
+print(tabulate(sorted(enemy_human_counts_rand.items()), headers=['# HUMANS', 'Number of games'], tablefmt="github"))
+print()
+print("The number of games where there are more humans on ToD's team was {}".format(tod_more_humans_rand))
 
-
-    
-    
